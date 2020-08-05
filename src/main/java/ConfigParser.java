@@ -10,7 +10,7 @@ public class ConfigParser {
     // constructor
     public ConfigParser(String configFileName) throws Exception {
         this.config = new HashMap<String, String>();
-        parseConfigFile(configFileName); // parse the config file once the object is created
+        parseConfigFile(configFileName.toLowerCase()); // convert filename to lower case and pass the config file once the object is created
     }
 
     //overloaded constructor to default to production when no config file was passed
@@ -59,8 +59,7 @@ public class ConfigParser {
     }
 
     // method to check if  the specified config fileName is valid and readable
-    private  static boolean validateConfigFileName(String ConfigFileLocation, String configFileName){
-        System.out.println(configFileName);
+    public  static boolean validateConfigFileName(String ConfigFileLocation, String configFileName){
         File file =  new File(ConfigFileLocation);
         // if the file name is not valid
         if(!(configFileName.equals("development-config.txt") || configFileName.equals("production-config.txt")|| configFileName.equals("staging-config.txt"))){
