@@ -2,7 +2,7 @@
 import java.io.File;
 import java.io.IOException;
 public class Main {
-
+/* i added some unit Tests using Junit 5.4 */
     public static void main(String[] args) throws Exception {
         // check if a valid environment name was passed via command line
         if ( args.length > 0){
@@ -22,7 +22,7 @@ public class Main {
     }
 
 //    validate the environment name that was passed via command line
-    public static boolean validateCommandLineEnvArg(String commandLineArgument){
+    private static boolean validateCommandLineEnvArg(String commandLineArgument){
             if(!(commandLineArgument.equals("development") || commandLineArgument.equals("production")|| commandLineArgument.equals("staging"))) {
                 return false;
             }

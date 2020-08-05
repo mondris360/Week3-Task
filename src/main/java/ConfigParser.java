@@ -52,14 +52,13 @@ public class ConfigParser {
     }
 
 
-
     // method to get a config value
     public String getConfigValue(String configKey){
         return config.get(configKey);
     }
 
     // method to check if  the specified config fileName is valid and readable
-    public  static boolean validateConfigFileName(String ConfigFileLocation, String configFileName){
+    private  static boolean validateConfigFileName(String ConfigFileLocation, String configFileName){
         File file =  new File(ConfigFileLocation);
         // if the file name is not valid
         if(!(configFileName.equals("development-config.txt") || configFileName.equals("production-config.txt")|| configFileName.equals("staging-config.txt"))){
@@ -69,7 +68,8 @@ public class ConfigParser {
     }
 
     // method to read the config file and store the settings as key and value pair in a hashMap
-    public static void readAndStoreConfigFileValues(String ConfigFileLocation) throws Exception {
+    private static boolean readAndStoreConfigFileValues(String ConfigFileLocation) throws Exception {
+        boolean fileReadSuccessfully = false;
         // create a new buffer reader object and use it to read the appropriate config file
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(ConfigFileLocation))) {
             String eachLineInFile;
@@ -99,6 +99,7 @@ public class ConfigParser {
                             System.out.println("key already exist");
                         }
                     }
+                    fileReadSuccessfully = true;
                 } else {
                     System.out.println("skipping empty line or line containing [application]");
                 }
@@ -107,6 +108,7 @@ public class ConfigParser {
             e.printStackTrace();
             throw new IOException(); // throw an error
         }
+        return fileReadSuccessfully;
     }
 
 }
